@@ -28,7 +28,7 @@ namespace CarInfoService.Sample
                 new RaportPrinter().Print(raport);
             }
             else Console.WriteLine("Confirmation not possible.");
-
+             
         }
     }
 }
