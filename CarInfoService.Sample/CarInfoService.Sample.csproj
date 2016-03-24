@@ -46,11 +46,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RaportPrinter.cs" />
+    <Compile Include="VehicleDataFromCmdLineArgsFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CarInfoService.PolishDatabase\CarInfoService.PolishDatabase.csproj">
+      <Project>{1bce578f-7c52-4700-ae14-fe113f3de2c0}</Project>
+      <Name>CarInfoService.PolishDatabase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CarInfoService\CarInfoService.csproj">
       <Project>{21492751-c6bf-41ef-b3ea-e968fda7935e}</Project>
       <Name>CarInfoService</Name>

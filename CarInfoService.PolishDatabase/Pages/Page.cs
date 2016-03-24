@@ -1,10 +1,12 @@
-﻿using HtmlAgilityPack;
+﻿using CarInfoService.Pages;
+using HtmlAgilityPack;
 
-namespace CarInfoService.Pages
+namespace CarInfoService.PolishDatabase.Pages
 {
-    public abstract class Page
+    public abstract class Page : IPage
     {
         protected readonly HtmlDocument Document;
+
         protected Page(string page)
         {
             var html = new HtmlDocument();

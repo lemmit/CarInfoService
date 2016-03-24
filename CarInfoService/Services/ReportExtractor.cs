@@ -3,14 +3,16 @@ using CarInfoService.Pages;
 
 namespace CarInfoService.Services
 {
-    public class ReportExtractor
+    public class ReportExtractor : IReportExtractor
     {
-        public Report ExtractFrom(CarHistoryPage historyPage)
+        public Report ExtractFrom(ICarHistoryPage historyPage)
         {
-            return new Report{
-                    Model = historyPage.Model,
-                    Brand = historyPage.Brand
-                };
+            return new Report(
+                model: historyPage.Model,
+                brand: historyPage.Brand,
+                insurance: "",
+                registered: "yes"
+                );
         }
     }
 }

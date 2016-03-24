@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using CarInfoService.Pages;
 using HtmlAgilityPack;
 
-namespace CarInfoService.Pages
+namespace CarInfoService.PolishDatabase.Pages
 {
-    public class MainPage : Page
+    public class MainPage : Page, IMainPage
     {
-        public MainPage(string page) : base(page) { }
+        public MainPage(string page) : base(page)
+        {
+        }
 
         private HtmlNode Descendants
         {
@@ -32,7 +36,10 @@ namespace CarInfoService.Pages
             get
             {
                 var encodedUrlVal = Inputs
-                    .Single(d => d.Attributes.Contains("name") && d.Attributes["name"].Value.Contains("javax.faces.encodedURL"))
+                    .Single(
+                        d =>
+                            d.Attributes.Contains("name") &&
+                            d.Attributes["name"].Value.Contains("javax.faces.encodedURL"))
                     .Attributes["value"].Value;
                 return encodedUrlVal;
             }
@@ -47,13 +54,14 @@ namespace CarInfoService.Pages
                 return viewstateVal;
             }
         }
+
         public string ActionUrl
         {
             get
             {
                 var form = Descendants.Descendants("form").Single();
                 var actionUrl = form.Attributes["action"].Value;
-                actionUrl = System.Net.WebUtility.HtmlDecode(actionUrl);
+                actionUrl = WebUtility.HtmlDecode(actionUrl);
                 return actionUrl;
             }
         }

@@ -2,9 +2,17 @@
 {
     public class Report
     {
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public string Insurance { get; set; }
-        public string Registered { get; set; }
+        public Report(string brand, string model, string insurance, string registered)
+        {
+            Brand = brand;
+            Model = model;
+            Insurance = insurance;
+            Registered = registered;
+        }
+
+        public string Brand { get; }
+        public string Model { get; }
+        public string Insurance { get; }
+        public string Registered { get; }
     }
 }

@@ -2,8 +2,15 @@
 {
     public class VehicleData
     {
-        public string RegisterationNumber { get; set; }
-        public string VehicleIndentificationNumber { get; set; }
-        public string RegisterationData { get; set;}
+        public VehicleData(string registerationNumber, string vin, string registerationData)
+        {
+            RegisterationNumber = registerationNumber;
+            RegisterationData = registerationData;
+            VehicleIndentificationNumber = vin;
+        }
+
+        public string RegisterationNumber { get; }
+        public string VehicleIndentificationNumber { get; }
+        public string RegisterationData { get; }
     }
 }

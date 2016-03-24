@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{21492751-C6BF-41EF-B3EA-E968FDA7935E}</ProjectGuid>
+    <ProjectGuid>{1BCE578F-7C52-4700-AE14-FE113F3DE2C0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CarInfoService</RootNamespace>
-    <AssemblyName>CarInfoService</AssemblyName>
+    <RootNamespace>CarInfoService.PolishDatabase</RootNamespace>
+    <AssemblyName>CarInfoService.PolishDatabase</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,16 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarInfoService.cs" />
-    <Compile Include="Clients\IDatabaseClient.cs" />
-    <Compile Include="Models\Report.cs" />
-    <Compile Include="Models\VehicleData.cs" />
-    <Compile Include="Pages\ICarHistoryPage.cs" />
-    <Compile Include="Pages\IMainPage.cs" />
-    <Compile Include="Pages\IPage.cs" />
+    <Compile Include="Pages\CarHistoryPage.cs" />
+    <Compile Include="Pages\MainPage.cs" />
+    <Compile Include="Pages\Page.cs" />
+    <Compile Include="PolishDatabaseCarInfoServiceFactory.cs" />
+    <Compile Include="PolishDatabaseClient.cs" />
+    <Compile Include="PolishDatabaseUrlsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IReportExtractor.cs" />
-    <Compile Include="Services\ReportExtractor.cs" />
+    <Compile Include="WebClientWithCookieHandling.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CarInfoService\CarInfoService.csproj">
+      <Project>{21492751-c6bf-41ef-b3ea-e968fda7935e}</Project>
+      <Name>CarInfoService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

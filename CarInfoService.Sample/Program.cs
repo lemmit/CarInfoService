@@ -1,34 +1,69 @@
 ﻿using System;
 using CarInfoService.Models;
+using CarInfoService.PolishDatabase;
 
 namespace CarInfoService.Sample
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            if (args.Length < 3)
+            if (!EnoughArgumentsSpecified(args))
             {
-                Console.WriteLine("Sample usage:\n" +
-                                  "carinfo <registerationNumber> <vin> <registerationData>\n" +
-                                  "e.g.:" +
-                                  "carinfo CGB23423 WGADFWEF93924f4 28.10.2007");
+                ShowUsageExample();
                 return;
             }
-            var sampleData = new VehicleData
-            {
-                RegisterationNumber = args[0],
-                VehicleIndentificationNumber = args[1],
-                RegisterationData = args[2]
-            };
-            var carInfoService = new CarInfoService();
-            var raport = carInfoService.GetVehicleRaport(sampleData);
+            var sampleData = ParseInputArguments(args);
+            var raport = GetCarReport(sampleData);
             if (raport != null)
             {
-                new RaportPrinter().Print(raport);
+                PrintReport(raport);
             }
-            else Console.WriteLine("Confirmation not possible.");
-             
+            else CarInformationNotAvailable();
+
+            WaitForUsersAction();
+        }
+
+        private static void WaitForUsersAction()
+        {
+            Console.ReadLine();
+        }
+
+        private static bool EnoughArgumentsSpecified(string[] args)
+        {
+            return args.Length >= 3;
+        }
+
+        private static VehicleData ParseInputArguments(string[] args)
+        {
+            var vehicleDataFromCmdLineArgsFactory = new VehicleDataFromCmdLineArgsFactory();
+            return vehicleDataFromCmdLineArgsFactory.Create(args);
+        }
+
+        private static void CarInformationNotAvailable()
+        {
+            Console.WriteLine("Confirmation not possible. Information not available.");
+        }
+
+        private static void ShowUsageExample()
+        {
+            Console.WriteLine("Sample usage:\n" +
+                              "carinfo <registerationNumber> <vin> <registerationData>\n" +
+                              "e.g.:" +
+                              "carinfo CGB23423 WGADFWEF93924f4 28.10.2007");
+        }
+
+        private static void PrintReport(Report raport)
+        {
+            var rp = new RaportPrinter();
+            rp.Print(raport);
+        }
+
+        private static Report GetCarReport(VehicleData sampleData)
+        {
+            var carInfoService = new PolishDatabaseCarInfoServiceFactory().Create();
+            var raport = carInfoService.GetVehicleRaport(sampleData);
+            return raport;
         }
     }
 }
